@@ -1,0 +1,37 @@
+<!-- vehiculo/templates/vehiculo/listar_vehiculos.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Listado de Vehículos</h1>
+
+<!-- Verificar si el usuario está autenticado -->
+{% if user.is_authenticated %}
+    <h2>Vehículos</h2>
+    <div class="container">
+    <h3>Precio Bajo (<= 10,000)</h3>
+    <ul>
+        {% for vehiculo in precio_bajo %}
+        <li>{{ vehiculo.marca }} - {{ vehiculo.modelo }} - ${{ vehiculo.precio }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Precio Medio (10,000 - 30,000)</h3>
+    <ul>
+        {% for vehiculo in precio_medio %}
+        <li>{{ vehiculo.marca }} - {{ vehiculo.modelo }} - ${{ vehiculo.precio }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Precio Alto (> 30,000)</h3>
+    <ul>
+        {% for vehiculo in precio_alto %}
+        <li>{{ vehiculo.marca }} - {{ vehiculo.modelo }} - ${{ vehiculo.precio }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+{% else %}
+    <p>Para ver el catálogo de vehículos, por favor <a href="{% url 'login' %}">inicia sesión</a>.</p>
+{% endif %}
+{% endblock %}
+
